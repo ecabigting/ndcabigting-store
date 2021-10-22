@@ -11,7 +11,7 @@ const Cart = ({ cart }) => {
     );
 
     const FilledCart = () => {
-        <>
+       return <>
             <Grid container spacing={3}>
                 {   
                     cart.line_items.map((item)=>(
@@ -30,13 +30,13 @@ const Cart = ({ cart }) => {
                     <Button className={style.checkoutButton} size="large" type="button" variant="contained" color="primarty">Checkout</Button>
                 </div>
             </div>
-        </>
+            </>
     };
 
     return (
         <Container>
-            <div className="styles.toolbar" />
-            <Typography className="style.title" variant="h3">Your Shopping Cart</Typography>
+            <div className={style.toolbar} />
+            <Typography className={style.title} variant="h3">Your Shopping Cart</Typography>
             { isEmpty ? <EmptyCart /> : <FilledCart/> }
         </Container>
     );

@@ -12,8 +12,8 @@ const App = () => {
     }
 
     const fecthCart = async () => {
-        //setCart(commerce.cart.retrieve());
-        commerce.cart.retrieve().then((data)=>(setCart(data)));
+        const data = await commerce.cart.retrieve();
+        setCart(data);
     }
 
     const handleAddToCart = async (productId, quantity) => {
@@ -26,12 +26,12 @@ const App = () => {
         fecthCart();
     },[])
 
-    // console.log(cart);
+    console.log(cart);
     return (
         <div>
             <Navbar cartCount={cart ? cart.total_items : '0'}/>
             {/* <Products productList={products} onAddToCart={handleAddToCart}/> */}
-            <Cart cart={cart}/>
+            {cart.total_items > 0 ? <Cart cart={cart}/> : 'nada' } 
         </div>
     )
 }
