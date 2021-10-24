@@ -26,12 +26,11 @@ const App = () => {
         fecthCart();
     },[])
 
-    console.log(cart);
     return (
         <div>
             <Navbar cartCount={cart ? cart.total_items : '0'}/>
             {/* <Products productList={products} onAddToCart={handleAddToCart}/> */}
-            {cart.total_items > 0 ? <Cart cart={cart}/> : 'nada' } 
+            <Cart cart={cart}/>
         </div>
     )
 }
