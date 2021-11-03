@@ -4,13 +4,12 @@ import useStyles from './styles'
 
 const CartItem = ({ item,onUpdateCartQty,onRemoveFromCart}) => {
     const styles = useStyles();
-    console.log(item)
     return (
         <Card>
             <CardMedia image={item.image.url} alt={item.name} className={styles.media} />
             <CardContent className={styles.cardContent}>
                 <Typography variant="h5">{item.name}</Typography>
-                <Typography variant="h7">{item.line_total.formatted_with_symbol}</Typography>
+                <Typography variant="h6">{item.line_total.formatted_with_symbol}</Typography>
             </CardContent>
             <CardActions className={styles.actions}>
                 <div className={styles.buttons}>
