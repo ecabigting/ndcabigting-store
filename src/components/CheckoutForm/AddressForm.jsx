@@ -16,9 +16,11 @@ export const AddressForm = ({checkoutToken}) => {
 
     const fetchShippingCountries = async(checkoutToken) => {
         const { countries } = await commerce.services.localeListShippingCountries(checkoutToken);
-        console.log(countries)
         setShippingCountries(countries);
+        setShippingCountry(Object.keys(countries)[0])
     }
+
+    const Countries = Object.entries(shippingCountries).map(([code,name])=>({id:code,label:name}));
 
     useEffect(()=>{
        fetchShippingCountries(checkoutToken.id);
@@ -38,8 +40,11 @@ export const AddressForm = ({checkoutToken}) => {
                         <FormInput required name='zip' label='ZIP / Postal Code'/>
                         <Grid item xs={12} sm={6}>
                             <InputLabel>Shipping Country</InputLabel>
-                            <Select value="" fullWidth >
-                                <MenuItem key={45} value="">Select a Country</MenuItem>
+                            <Select value={shippingCountry} fullWidth onChange={(e)=>setShippingCountry(e.target.value)}>
+                                { Countries.map((country)=>(
+                                        <MenuItem key={country.id} value={country.id}>{country.label}</MenuItem>
+                                ))}
+                                
                             </Select>
                         </Grid>
                         <Grid item xs={12} sm={6}>
