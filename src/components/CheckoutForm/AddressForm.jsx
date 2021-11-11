@@ -63,7 +63,7 @@ export const AddressForm = ({checkoutToken,next}) => {
         <>
             <Typography variant="h6" gutterBottom>Shipping Address</Typography>
             <FormProvider {...methods}>
-                <form onSubmit={methods.handleSubmit((data)=> next(...data,shippingCountry, shippingSubdivision,shippingOption))}>
+                <form onSubmit={methods.handleSubmit((data)=> next({...data,shippingCountry, shippingSubdivision,shippingOption}))}>
                     <Grid container spacing={3}>
                         <FormInput required name='firstName' label='First Name'/>
                         <FormInput required name='lastName' label='Last Name'/>
@@ -98,14 +98,16 @@ export const AddressForm = ({checkoutToken,next}) => {
                                 </Select>
                             </Grid>
                             : <Grid item xs={12} sm={12}>
-                                <Typography variant="warning" gutterBottom >We do not deliver to your province yet.. </Typography>                                
+                                <Typography variant="warning" gutterBottom >We do not deliver to your province yet. Please select a different province. </Typography>                                
                             </Grid>
                         }
                     </Grid>
                     <br/>
                     <div style={{ display: 'flex', justifyContent: 'space-between '}}>
                         <Button component={Link} to="/cart" variant="outlined">Back to cart</Button>
-                        <Button type="submit" variant="outlined" color="primary">Next</Button>
+                        { Options.length > 0 ? <Button type="submit" variant="contained" color="primary" >Next</Button> 
+                                            : <Button type="submit" variant="contained" color="primary" disabled>Next</Button>}
+                        
                     </div>
                 </form>
             </FormProvider>
