@@ -8,12 +8,18 @@ import { commerce } from '../../../lib/commerce'
 const steps = ['Shipping Address', 'Payment Details'];
 const Confirmation = () => (<div>Confirmation</div>)
 
-export const Checkout = ({cart}) => {
+export const Checkout = ({cart,
+                            order,
+                            onCaptureCheckout,
+                            error   }) => {
     const [activeStep,setActiveStep] = useState(0);
     const [checkoutToken,setCheckoutToken] = useState(null);
     const [shippingData, setShippingData] = useState({});
-    const nextStep = () => setActiveStep((prevActiveStep)=>prevActiveStep+1);
-    const backStep = () => setActiveStep((prevActiveStep)=>prevActiveStep-1);
+
+    const nextStep = () => setActiveStep((prevActiveStep) => prevActiveStep + 1);
+    const backStep = () => setActiveStep((prevActiveStep) => prevActiveStep - 1);
+
+
     const styles = useStyles();
 
     useEffect(()=>{
@@ -36,14 +42,14 @@ export const Checkout = ({cart}) => {
 
     const Form = () => activeStep === 0 ? 
     <AddressForm checkoutToken={checkoutToken} next={next}/> : 
-    <PaymentForm shippingData={shippingData} checkoutToken={checkoutToken}/>
+    <PaymentForm shippingData={shippingData} onCaptureCheckout={onCaptureCheckout} checkoutToken={checkoutToken} next={next} nextStep={nextStep} backStep={backStep}/>
     return (
         <>
             <div className={styles.toolbar}/>
             <main className={styles.layout}>
                 <Paper className={styles.paper}>
                     <Typography variant="h4" align="center">Checkout</Typography>
-                    <Stepper active={activeStep} className={styles.stepper}>
+                    <Stepper activeStep={activeStep} className={styles.stepper}>
                         {steps.map((step)=>(
                             <Step key={step}>
                                 <StepLabel>{step}</StepLabel>
