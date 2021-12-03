@@ -98,7 +98,7 @@ export const AddressForm = ({checkoutToken,next}) => {
                                 </Select>
                             </Grid>
                             : <Grid item xs={12} sm={12}>
-                                <Typography variant="warning" gutterBottom >We do not deliver to your selected province yet. Please select a different province. </Typography>                                
+                                <Typography variant="body2" gutterBottom >We do not deliver to your selected province yet. Please select a different province. </Typography>                                
                             </Grid>
                         }
                     </Grid>
